@@ -22,6 +22,8 @@ public:
     float getPerimeter() const;
 
     void resetCache();
+
+    static Rectangle createRandomRectangle();
 };
 
 #endif //OOP_1_GEOMETRY_H

@@ -1,6 +1,8 @@
 #include "iostream"
 #include "stdexcept"
 #include "format"
+#include "cstdlib"
+#include "ctime"
 #include "geometry.h"
 
 Rectangle::Rectangle(float length, float width) {
@@ -63,4 +65,14 @@ std::string Rectangle::getRectInfo() const {
     return std::format("Length: {}\nWidth: {}\nX: {}\nY: {}\nArea: {}\nPerimeter: {}",
                        this->getLength(), this->getWidth(), this->getX(), this->getY(),
                        this->getArea(), this->getPerimeter());
+}
+
+Rectangle Rectangle::createRandomRectangle() {
+    std::srand(std::time(nullptr));
+    auto randomLength = static_cast<float>(std::rand() % 20 + 1);
+    auto randomWidth = static_cast<float>(std::rand() % 20 + 1);
+    auto randomX = static_cast<float>(std::rand() % 200 - 50);
+    auto randomY = static_cast<float>(std::rand() % 200 - 50);
+
+    return {randomLength, randomWidth, randomX, randomY};
 }
