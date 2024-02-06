@@ -2,5 +2,6 @@
 #include "geometry.h"
 
 int main() {
-    std::cout << multiply_5(2);
+    Rectangle my_rectangle{3, 4};
+    std::cout << my_rectangle.getLength();
 }
