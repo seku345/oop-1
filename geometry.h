@@ -21,6 +21,14 @@ public:
     float getArea() const;
     float getPerimeter() const;
 
+    void setLength(float newLength);
+    void setWidth(float newWidth);
+    void setX(float newX);
+    void setY(float newY);
+
+    void resize(float factor);
+    void move(float deltaX, float deltaY);
+
     void resetCache();
 
     static Rectangle createRandomRectangle();

@@ -56,6 +56,37 @@ float Rectangle::getPerimeter() const {
     return cachedPerimeter;
 }
 
+void Rectangle::setLength(float newLength) {
+     if (newLength <= 0) {
+         throw std::invalid_argument("The length must be greater than 0");
+     }
+     this->length = newLength;
+}
+void Rectangle::setWidth(float newWidth) {
+    if (newWidth <= 0) {
+        throw std::invalid_argument("The width must be greater than 0");
+    }
+    this->width = newWidth;
+}
+void Rectangle::setX(float newX) {
+    this->x_cor = newX;
+}
+void Rectangle::setY(float newY) {
+    this->y_cor = newY;
+}
+
+void Rectangle::resize(float factor) {
+    if (factor <= 0) {
+        throw std::invalid_argument("The factor must be greater than 0");
+    }
+    this->length *= factor;
+    this->width *= factor;
+}
+void Rectangle::move(float deltaX, float deltaY) {
+    this->x_cor += deltaX;
+    this->y_cor += deltaY;
+}
+
 void Rectangle::resetCache() {
     this->cachedArea = 0;
     this->cachedPerimeter = 0;
