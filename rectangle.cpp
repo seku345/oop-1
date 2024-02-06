@@ -5,7 +5,7 @@
 #include "ctime"
 #include "geometry.h"
 
-Rectangle::Rectangle(float length, float width) {
+Rectangle::Rectangle(float const length, float const width) {
     if (length <= 0) {
         throw std::invalid_argument("The length must be greater than 0");
     }
@@ -18,7 +18,7 @@ Rectangle::Rectangle(float length, float width) {
     this->y_cor = 0.0;
 }
 
-Rectangle::Rectangle(float length, float width, float x, float y) {
+Rectangle::Rectangle(float const length, float const width, float const x, float const y) {
     if (length <= 0) {
         throw std::invalid_argument("The length must be greater than 0");
     }
@@ -44,45 +44,46 @@ float Rectangle::getY() const {
     return this->y_cor;
 }
 float Rectangle::getArea() const {
-    if (cachedArea == 0) {
-        cachedArea = this->length * this->width;
+    if (this->cachedArea == 0) {
+        this->cachedArea = this->length * this->width;
     }
-    return cachedArea;
+    return this->cachedArea;
 }
 float Rectangle::getPerimeter() const {
-    if (cachedPerimeter == 0) {
-        cachedPerimeter = 2 * (this->length + this->width);
+    if (this->cachedPerimeter == 0) {
+        this->cachedPerimeter = 2 * (this->length + this->width);
     }
-    return cachedPerimeter;
+    return this->cachedPerimeter;
 }
 
-void Rectangle::setLength(float newLength) {
+void Rectangle::setLength(float const newLength) {
      if (newLength <= 0) {
          throw std::invalid_argument("The length must be greater than 0");
      }
      this->length = newLength;
 }
-void Rectangle::setWidth(float newWidth) {
+void Rectangle::setWidth(float const newWidth) {
     if (newWidth <= 0) {
         throw std::invalid_argument("The width must be greater than 0");
     }
     this->width = newWidth;
 }
-void Rectangle::setX(float newX) {
+void Rectangle::setX(float const newX) {
     this->x_cor = newX;
 }
-void Rectangle::setY(float newY) {
+void Rectangle::setY(float const newY) {
     this->y_cor = newY;
 }
 
-void Rectangle::resize(float factor) {
+void Rectangle::resize(float const factor) {
     if (factor <= 0) {
         throw std::invalid_argument("The factor must be greater than 0");
     }
+    resetCache();
     this->length *= factor;
     this->width *= factor;
 }
-void Rectangle::move(float deltaX, float deltaY) {
+void Rectangle::move(float const deltaX, float const deltaY) {
     this->x_cor += deltaX;
     this->y_cor += deltaY;
 }
@@ -96,6 +97,14 @@ std::string Rectangle::getRectInfo() const {
     return std::format("Length: {}\nWidth: {}\nX: {}\nY: {}\nArea: {}\nPerimeter: {}",
                        this->getLength(), this->getWidth(), this->getX(), this->getY(),
                        this->getArea(), this->getPerimeter());
+}
+
+bool Rectangle::isPointInside(const float x, const float y) const {
+    float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
+    return (x >= x1 and x <= x2) and (y >= y1 and y <= y2);
+}
+bool Rectangle::isIntersecting(const Rectangle& other) const {
+    float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
 }
 
 Rectangle Rectangle::createRandomRectangle() {

@@ -31,6 +31,9 @@ public:
 
     void resetCache();
 
+    bool isPointInside(float x, float y) const;
+    bool isIntersecting(const Rectangle& other) const;
+
     static Rectangle createRandomRectangle();
 };
 
