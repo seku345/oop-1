@@ -7,13 +7,21 @@ private:
     float width;
     float x_cor;
     float y_cor;
+    mutable float cachedArea{0};
+    mutable float cachedPerimeter{0};
 public:
-    Rectangle(float length, float width, float x = 0.0, float y = 0.0);
+    Rectangle(float length, float width);
+    Rectangle(float length, float width, float x, float y);
 
+    std::string getRectInfo() const;
     float getLength() const;
     float getWidth() const;
     float getX() const;
     float getY() const;
+    float getArea() const;
+    float getPerimeter() const;
+
+    void resetCache();
 };
 
 #endif //OOP_1_GEOMETRY_H

@@ -3,5 +3,5 @@
 
 int main() {
     Rectangle my_rectangle{3, 4};
-    std::cout << my_rectangle.getLength();
+    std::cout << my_rectangle.getRectInfo();
 }
