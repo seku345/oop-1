@@ -108,6 +108,26 @@ bool Rectangle::isIntersecting(const Rectangle& other) const {
     float X1{other.x_cor}, X2{other.x_cor + other.length}, Y1{other.y_cor}, Y2{other.y_cor + other.width};
     return x1 <= X2 and x2 >= X1 and y1 <= Y2 and y2 >= Y1;
 }
+bool Rectangle::isEqual(const Rectangle &other) const {
+    return ((this->length == other.length) and (this->width == other.width)) or
+           ((this->length == other.width) and (this->width == other.length));
+}
+
+bool Rectangle::operator==(const Rectangle& other) const {
+    return this->getArea() == other.getArea();
+}
+bool Rectangle::operator>(const Rectangle &other) const {
+    return this->getArea() > other.getArea();
+}
+bool Rectangle::operator<(const Rectangle &other) const {
+    return this->getArea() < other.getArea();
+}
+bool Rectangle::operator>=(const Rectangle &other) const {
+    return this->getArea() >= other.getArea();
+}
+bool Rectangle::operator<=(const Rectangle &other) const {
+    return this->getArea() <= other.getArea();
+}
 
 Rectangle Rectangle::createRandomRectangle() {
     std::srand(std::time(nullptr));

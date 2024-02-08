@@ -6,7 +6,8 @@ int main() {
 //    std::cout << my_rectangle.getRectInfo();
 //    Rectangle rect{3, 4};
 //    std::cout << rect.isPointInside(0, 0);
-    Rectangle rect1{2, 2, 0, 0};
-    Rectangle rect2{2, 2, 2, 0};
-    std::cout << rect1.isIntersecting(rect2);
+    Rectangle rect1{4, 2, 0, 0};
+    Rectangle rect2{1, 8, 2, 0};
+    std::cout << (rect1 == rect2) << '\n';
+    std::cout << rect1.isEqual(rect2);
 }

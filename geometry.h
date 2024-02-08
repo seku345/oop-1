@@ -33,6 +33,13 @@ public:
 
     bool isPointInside(float x, float y) const;
     bool isIntersecting(const Rectangle& other) const;
+    bool isEqual(const Rectangle& other) const;
+
+    bool operator==(const Rectangle& other) const;
+    bool operator>(const Rectangle& other) const;
+    bool operator>=(const Rectangle& other) const;
+    bool operator<(const Rectangle& other) const;
+    bool operator<=(const Rectangle& other) const;
 
     static Rectangle createRandomRectangle();
 };
