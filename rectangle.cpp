@@ -105,6 +105,8 @@ bool Rectangle::isPointInside(const float x, const float y) const {
 }
 bool Rectangle::isIntersecting(const Rectangle& other) const {
     float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
+    float X1{other.x_cor}, X2{other.x_cor + other.length}, Y1{other.y_cor}, Y2{other.y_cor + other.width};
+    return x1 <= X2 and x2 >= X1 and y1 <= Y2 and y2 >= Y1;
 }
 
 Rectangle Rectangle::createRandomRectangle() {
