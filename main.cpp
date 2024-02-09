@@ -8,6 +8,7 @@ int main() {
 //    std::cout << rect.isPointInside(0, 0);
     Rectangle rect1{2, 2, 1, 0};
     Rectangle rect2{3, 2, 2, -1};
-    Rectangle rect3 = (rect1 * 2);
+    Square square{2};
+    Rectangle rect3 = (square * 2.5);
     std::cout << rect3.getRectInfo();
 }

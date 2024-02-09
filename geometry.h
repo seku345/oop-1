@@ -50,4 +50,10 @@ public:
     static Rectangle createRandomRectangle();
 };
 
+class Square : public Rectangle {
+public:
+    Square(float length) : Rectangle(length, length) {};
+    Square(float length, float x, float y) : Rectangle(length, length, x, y) {};
+};
+
 #endif //OOP_1_GEOMETRY_H
