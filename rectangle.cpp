@@ -13,8 +13,8 @@ Rectangle::Rectangle(float const length, float const width) {
     }
     this->length = length;
     this->width = width;
-    this->x_cor = 0.0;
-    this->y_cor = 0.0;
+    this->x = 0.0;
+    this->y = 0.0;
 }
 
 Rectangle::Rectangle(float const length, float const width, float const x, float const y) {
@@ -26,8 +26,8 @@ Rectangle::Rectangle(float const length, float const width, float const x, float
     }
     this->length = length;
     this->width = width;
-    this->x_cor = x;
-    this->y_cor = y;
+    this->x = x;
+    this->y = y;
 }
 
 float Rectangle::getLength() const {
@@ -37,10 +37,10 @@ float Rectangle::getWidth() const {
     return this->width;
 }
 float Rectangle::getX() const {
-    return this->x_cor;
+    return this->x;
 }
 float Rectangle::getY() const {
-    return this->y_cor;
+    return this->y;
 }
 float Rectangle::getArea() const {
     if (this->cachedArea == 0) {
@@ -68,10 +68,10 @@ void Rectangle::setWidth(float const newWidth) {
     this->width = newWidth;
 }
 void Rectangle::setX(float const newX) {
-    this->x_cor = newX;
+    this->x = newX;
 }
 void Rectangle::setY(float const newY) {
-    this->y_cor = newY;
+    this->y = newY;
 }
 
 void Rectangle::resize(float const factor) {
@@ -83,8 +83,8 @@ void Rectangle::resize(float const factor) {
     this->width *= factor;
 }
 void Rectangle::move(float const deltaX, float const deltaY) {
-    this->x_cor += deltaX;
-    this->y_cor += deltaY;
+    this->x += deltaX;
+    this->y += deltaY;
 }
 
 void Rectangle::resetCache() {
@@ -99,12 +99,12 @@ std::string Rectangle::getRectInfo() const {
 }
 
 bool Rectangle::isPointInside(const float x, const float y) const {
-    float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
+    float x1{this->x}, x2{this->x + this->length}, y1{this->y}, y2{this->y + this->width};
     return (x >= x1 and x <= x2) and (y >= y1 and y <= y2);
 }
 bool Rectangle::isIntersecting(const Rectangle& other) const {
-    float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
-    float X1{other.x_cor}, X2{other.x_cor + other.length}, Y1{other.y_cor}, Y2{other.y_cor + other.width};
+    float x1{this->x}, x2{this->x + this->length}, y1{this->y}, y2{this->y + this->width};
+    float X1{other.x}, X2{other.x + other.length}, Y1{other.y}, Y2{other.y + other.width};
     return x1 <= X2 and x2 >= X1 and y1 <= Y2 and y2 >= Y1;
 }
 bool Rectangle::isEqual(const Rectangle &other) const {
@@ -132,8 +132,8 @@ bool Rectangle::operator!=(const Rectangle &other) const {
 }
 
 Rectangle Rectangle::operator+(const Rectangle &other) const {
-    float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
-    float X1{other.x_cor}, X2{other.x_cor + other.length}, Y1{other.y_cor}, Y2{other.y_cor + other.width};
+    float x1{this->x}, x2{this->x + this->length}, y1{this->y}, y2{this->y + this->width};
+    float X1{other.x}, X2{other.x + other.length}, Y1{other.y}, Y2{other.y + other.width};
     float newX1 = std::min(x1, X1);
     float newY1 = std::min(y1, Y1);
     float newX2 = std::max(x2, X2);
@@ -144,8 +144,8 @@ Rectangle Rectangle::operator&(const Rectangle &other) const {
     if (not this->isIntersecting(other)) {
         throw std::invalid_argument("Rectangles don't intersect");
     }
-    float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
-    float X1{other.x_cor}, X2{other.x_cor + other.length}, Y1{other.y_cor}, Y2{other.y_cor + other.width};
+    float x1{this->x}, x2{this->x + this->length}, y1{this->y}, y2{this->y + this->width};
+    float X1{other.x}, X2{other.x + other.length}, Y1{other.y}, Y2{other.y + other.width};
     float newX1 = std::max(x1, X1);
     float newY1 = std::max(y1, Y1);
     float newX2 = std::min(x2, X2);
@@ -159,13 +159,13 @@ Rectangle Rectangle::operator*(const float& factor) const {
     if (factor <= 0) {
         throw std::invalid_argument("The factor must be greater than 0");
     }
-    return {this->length * factor, this->width * factor, this->x_cor, this->y_cor};
+    return {this->length * factor, this->width * factor, this->x, this->y};
 }
 Rectangle Rectangle::operator/(const float& factor) const {
     if (factor <= 0) {
         throw std::invalid_argument("The factor must be greater than 0");
     }
-    return {this->length / factor, this->width / factor, this->x_cor, this->y_cor};
+    return {this->length / factor, this->width / factor, this->x, this->y};
 }
 
 Rectangle Rectangle::createRandomRectangle() {
