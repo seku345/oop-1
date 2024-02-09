@@ -1,4 +1,3 @@
-#include "iostream"
 #include "stdexcept"
 #include "format"
 #include "cstdlib"
@@ -127,6 +126,43 @@ bool Rectangle::operator>=(const Rectangle &other) const {
 }
 bool Rectangle::operator<=(const Rectangle &other) const {
     return this->getArea() <= other.getArea();
+}
+
+Rectangle Rectangle::operator+(const Rectangle &other) const {
+    float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
+    float X1{other.x_cor}, X2{other.x_cor + other.length}, Y1{other.y_cor}, Y2{other.y_cor + other.width};
+    float newX1 = std::min(x1, X1);
+    float newY1 = std::min(y1, Y1);
+    float newX2 = std::max(x2, X2);
+    float newY2 = std::max(y2, Y2);
+    return {newX2 - newX1, newY2 - newY1, newX1, newY1};
+}
+Rectangle Rectangle::operator&(const Rectangle &other) const {
+    if (not this->isIntersecting(other)) {
+        throw std::invalid_argument("Rectangles don't intersect");
+    }
+    float x1{this->x_cor}, x2{this->x_cor + this->length}, y1{this->y_cor}, y2{this->y_cor + this->width};
+    float X1{other.x_cor}, X2{other.x_cor + other.length}, Y1{other.y_cor}, Y2{other.y_cor + other.width};
+    float newX1 = std::max(x1, X1);
+    float newY1 = std::max(y1, Y1);
+    float newX2 = std::min(x2, X2);
+    float newY2 = std::min(y2, Y2);
+    if (newX1 == newX2 or newY1 == newY2) {
+        throw std::invalid_argument("The area of the new Rectangle is zero");
+    }
+    return {newX2 - newX1, newY2 - newY1, newX1, newY1};
+}
+Rectangle Rectangle::operator*(const float& factor) const {
+    if (factor <= 0) {
+        throw std::invalid_argument("The factor must be greater than 0");
+    }
+    return {this->length * factor, this->width * factor, this->x_cor, this->y_cor};
+}
+Rectangle Rectangle::operator/(const float& factor) const {
+    if (factor <= 0) {
+        throw std::invalid_argument("The factor must be greater than 0");
+    }
+    return {this->length / factor, this->width / factor, this->x_cor, this->y_cor};
 }
 
 Rectangle Rectangle::createRandomRectangle() {

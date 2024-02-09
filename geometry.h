@@ -41,6 +41,11 @@ public:
     bool operator<(const Rectangle& other) const;
     bool operator<=(const Rectangle& other) const;
 
+    Rectangle operator+(const Rectangle& other) const;
+    Rectangle operator&(const Rectangle& other) const;
+    Rectangle operator*(const float& factor) const;
+    Rectangle operator/(const float& factor) const;
+
     static Rectangle createRandomRectangle();
 };
 
