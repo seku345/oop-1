@@ -10,4 +10,5 @@ add_executable(oop_1
         rectangle.cpp
         geometry.h
         circle.cpp
+        square.cpp
 )

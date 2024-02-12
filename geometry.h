@@ -4,7 +4,7 @@
 #include <string>
 
 class Rectangle {
-private:
+protected:
     float length;
     float width;
     float x;
@@ -23,8 +23,8 @@ public:
     float getArea() const;
     float getPerimeter() const;
 
-    void setLength(float newLength);
-    void setWidth(float newWidth);
+    virtual void setLength(float newLength);
+    virtual void setWidth(float newWidth);
     void setX(float newX);
     void setY(float newY);
 
@@ -53,9 +53,16 @@ public:
 };
 
 class Square : public Rectangle {
+private:
+    using Rectangle::createRandomRectangle;
 public:
     Square(float length) : Rectangle(length, length) {};
     Square(float length, float x, float y) : Rectangle(length, length, x, y) {};
+
+    void setLength(float newLength) override;
+    void setWidth(float newWidth) override;
+
+    static Square createRandomSquare();
 };
 
 class Circle {
